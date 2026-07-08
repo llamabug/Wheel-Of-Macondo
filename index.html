@@ -10,18 +10,25 @@
 <body>
 
     <div class="container">
-        <h1>Wheel of Macondo</h1>
-        <h2>✩°｡⋆🌺🥭🦜🌴🌺🍍🍹🍉🥥⋆｡°✩</h2>
-        <br>
-        <p>Seperate entries with a comma!</p>
-        <p>Enter names:</p>
-        <input type="text" id="namesInput" placeholder="Phoebe, Rachel, Monica">
-        <br>
-        <canvas id="wheel" width="500" height="500">
-        </canvas>
-        <div class="result">
+        <div class="rbox">
+            <h1>Wheel of Macondo</h1>
+            <h2>✩°｡⋆🌺🥭🦜🌴🌺🍍🍹🍉🥥⋆｡°✩</h2>
+            <p>Enter items (separate with a comma!):</p>
+            <input type="text" id="items" placeholder="Phoebe, Rachel, Monica">
         </div>
-        <button id="spin">Spin the Wheel!</button>
+        <div class="lbox">
+            <canvas id="wheel" width="510" height="510">
+            </canvas>
+            <button id="spin">Spin the Wheel!</button>
+        </div>
+
+        <div id="winnerPopup" class="popup">
+            <div class="popup-content">
+                <h2 id="winnerText"></h2>
+                <button id="closePopup">Close</button>
+            </div>
+        </div>
+
     </div>
     <script src="script.js"></script>
 
