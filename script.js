@@ -2,7 +2,6 @@ const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 const spinButton = document.getElementById("spin");
 const namesInput = document.getElementById("items");
-const resultDisplay = document.getElementById("result");
 const colours = [
     "#e7c68d",
     "#ca956c",
@@ -24,6 +23,13 @@ let spinTimeTotal = 0;
 let spinning = false;
 let pointerOffset = 0;
 let pointerDirection = 1;
+
+
+
+document.getElementById("closePopup").addEventListener("click", () => {
+        document.getElementById("winnerPopup").style.display = "none";
+    })
+
 
 
 function drawWheel() {
@@ -88,11 +94,14 @@ function stopRotateWheel() {
 
     spinning = false;
 
-    const degrees = (startingAngle * 180 / Math.PI) % 360;
+    const degrees = (startAngle * 180 / Math.PI) % 360;
     const adjustedDegrees = (360 - degrees) % 360;
     const index = Math.floor(adjustedDegrees / (360 / names.length));
-
-    resultDisplay.textContent = `winner: ${names[index]}`;
+    
+    
+    document.getElementById("winnerText").textContent = names[index];
+    document.getElementById("winnerPopup").style.display = "flex";
+    
 
 }
 
@@ -112,10 +121,10 @@ spinButton.addEventListener("click", () => {
     if (spinning) return; 
     names = namesInput.value.split(",").map(name => name.trim()).filter(name => name);
     if (names.length < 2) {
-        resultDisplay.textContent = "Please enter at least 2 items";
+        alert("Please enter at least 2 items!");
         return;
     }
-    resultDisplay.textContent = "";
+    currentSpeed = Math.random() * 20 + 30;
     arc = (2 * Math.PI) / names.length;
     spinAngleStart = Math.random() * 40 + 40;
     spinTime = 0;
@@ -127,8 +136,14 @@ spinButton.addEventListener("click", () => {
 });
 
 
-
 names = ["Code", "Build", "Dream", "Create", "Ship", "Macondo",];
 arc = (2 * Math.PI) / names.length;
 drawWheel();
 
+/** const popup = document.getElementById("winnerPopup");
+
+popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+        popup.style.display = "none";
+    }
+});*/
