@@ -5,7 +5,6 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    margin-top: 80px;
     background: #e5d0b6;
     color: #6e3a12;
 }
@@ -23,10 +22,16 @@ body {
 
 h1 {
     font-size: 45px;
+    text-decoration: underline wavy;
+    text-underline-offset: 6px;
 }
 
 h2 {
     font-size: 35px;
+}
+
+p {
+    font-size: 20px;
 }
 
 input {
@@ -82,6 +87,8 @@ canvas:hover {
     justify-content: center;
     align-items: center;
     z-index: 100;
+
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .popup-content {
@@ -95,7 +102,7 @@ canvas:hover {
     padding: 30px;
     width: 250px;
     text-align: center;
-    color: brown;
+    color: #6e3a12;
     font-size: 30px;
 }
 
@@ -109,5 +116,5 @@ canvas:hover {
 }
 
 .popup-content button:hover {
-    background: #e4df86;
+    background: #fffcca;
 }
