@@ -11,10 +11,15 @@
 
     <div class="container">
         <div class="rbox">
-            <h1>Wheel of Macondo</h1>
-            <h2>✩°｡⋆🌺🥭🦜🌴🌺🍍🍹🍉🥥⋆｡°✩</h2>
+            <h2 style="color: #e5d0b6;">blank</h2>
+            <h1>✩°⋆  Wheel of Macondo  ⋆°✩</h1>
+            <br>
             <p>Enter items (separate with a comma!):</p>
+            <br>
             <input type="text" id="items" placeholder="Phoebe, Rachel, Monica">
+            <br>
+            <br>
+            <h2>✩°｡⋆🌺🥭🦜🌴🌺🍍🍹🍉🥥⋆｡°✩</h2>
         </div>
         <div class="lbox">
             <canvas id="wheel" width="510" height="510">
@@ -26,11 +31,13 @@
             <div class="popup-content">
                 <h2 id="winnerText"></h2>
                 <button id="closePopup">Close</button>
+                <button id="removePopup">Remove Item</button>
             </div>
         </div>
 
     </div>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 </body>
 </html>
