@@ -11,6 +11,9 @@ const colours = [
     "#d6e08d",
 ]
 
+const clickSound = new Audio("click.wav");
+const trumpetSound = new Audio("trumpet.mp3");
+
 
 
 let names = [];
@@ -23,6 +26,7 @@ let spinTimeTotal = 0;
 let spinning = false;
 let pointerOffset = 0;
 let pointerDirection = 1;
+let previousSegment = 0;
 
 
 
@@ -30,6 +34,11 @@ document.getElementById("closePopup").addEventListener("click", () => {
         document.getElementById("winnerPopup").style.display = "none";
     })
 
+
+document.getElementById("removePopup").addEventListener("click", () => {
+    document.getElementById("winnerPopup").style.display = "none";
+    document.getElementById("winnerText").textContent = "";
+})
 
 
 function drawWheel() {
@@ -63,11 +72,13 @@ function drawWheel() {
 
     
     ctx.beginPath();
-    ctx.moveTo(radius - 10 + pointerOffset, 10);
-    ctx.lineTo(radius + 10 + pointerOffset, 10);
+    ctx.moveTo(radius - 15 + pointerOffset, 10);
+    ctx.lineTo(radius + 15 + pointerOffset, 10);
     ctx.lineTo(radius + pointerOffset, 50);
     ctx.fillStyle = "black";
     ctx.fill();
+    ctx.font = "20px serif";
+ctx.fillText(" 🥭", radius - 18, 45);
 
 }
 
@@ -82,6 +93,15 @@ function rotateWheel() {
     
     startAngle += currentSpeed * Math.PI / 180;
     currentSpeed *= 0.985;
+
+    const currentSegment =
+    Math.floor(((startAngle * 180 / Math.PI) % 360) / (360 / names.length));
+
+    if (currentSegment !== previousSegment) {
+        clickSound.currentTime = 0;
+        clickSound.play();
+        previousSegment = currentSegment;
+    }
 
     drawWheel();
     requestAnimationFrame(rotateWheel);
@@ -99,9 +119,17 @@ function stopRotateWheel() {
     const index = Math.floor(adjustedDegrees / (360 / names.length));
     
     
-    document.getElementById("winnerText").textContent = names[index];
+    document.getElementById("winnerText").textContent = names[index - 1];
     document.getElementById("winnerPopup").style.display = "flex";
     
+
+    trumpetSound.play();
+
+    confetti({
+        particleCount: 100,
+        spread:70
+    });
+
 
 }
 
@@ -131,8 +159,16 @@ spinButton.addEventListener("click", () => {
     spinTimeTotal = Math.random() * 1000 + 1300;
     spinning = true;
     drawWheel();
+    startAngle += Math.random() * Math.PI * 2;
     rotateWheel();
 
+});
+
+
+namesInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        spinButton.click();
+    }
 });
 
 
@@ -140,10 +176,3 @@ names = ["Code", "Build", "Dream", "Create", "Ship", "Macondo",];
 arc = (2 * Math.PI) / names.length;
 drawWheel();
 
-/** const popup = document.getElementById("winnerPopup");
-
-popup.addEventListener("click", (e) => {
-    if (e.target === popup) {
-        popup.style.display = "none";
-    }
-});*/
